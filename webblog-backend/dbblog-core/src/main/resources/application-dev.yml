@@ -1,0 +1,72 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    druid:
+      url: jdbc:mysql://**:3307/dbblog?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: **
+      password: **
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+  # redis配置
+  redis:
+    host: **
+    port: 6380
+    timeout: 6s #连接池超时时长
+    lettuce:
+      pool:
+        max-active: 1000 #连接池最大连接数
+        max-wait: -1ms #连接池最大阻塞等待时间
+        max-idle: 10 #连接池最大空闲连接
+        min-idle: 5 #连接池最小空闲连接
+    password: **
+  # elasticsearch配置
+  data:
+    elasticsearch:
+      cluster-name: codelab-elasticsearch
+      cluster-nodes: **:9300
+  # rabbitMQ配置
+  rabbitmq:
+    host: **
+    port: 5672
+    username: **
+    password: **
+#mybatis-plus
+mybatis-plus:
+  global-config:
+    #刷新Mapper，只在开发环境打开
+    refresh: true
+oss:
+  qiniu:
+    domain: http://oss.osalien.com
+    prefix: dbblog
+    accessKey: ENC(3***UoBmVlB3kJ+tutGTNKQvFp+lU5rljjaYStPkDLhjqtgxvANzSHNdLj5yEKc2SbDSxPfpLzpta8=)
+    secretKey: ENC(Q***0LL+y3tVtg00qtyicNDUvp7v5wKvVxsh/9KmlzWAtAly/DCsi+YeSEQkK6XxzeuQO7c8nwnk0o=)
+    bucketName: oss
+
+jasypt:
+  encryptor:
+    password: dbblog-jasypt
